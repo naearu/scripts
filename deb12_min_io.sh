@@ -28,9 +28,12 @@ apt-get install -y wget
 
 echo "Installing Minio server"
 
-wget https://dl.minio.io/server/minio/release/linux-amd64/minio
-chmod +x minio
-mv minio /usr/local/bin
+wget -O /usr/local/bin/minio https://dl.minio.io/server/minio/release/linux-amd64/minio
+chmod +x /usr/local/bin/minio
+
+wget -O /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc
+chmod +x /usr/local/bin/mc
+
 
 # create minio user
 echo "Creating a Minio user"
@@ -70,6 +73,15 @@ echo "Enable Minio to start on boot:"
 
 systemctl enable minio
 systemctl start minio
+
+# mc admin user add local dev minioadmin-dev
+# mc admin user add local api minioadmin-api
+# mc admin policy set local readwrite user=dev
+# mc admin policy set local readwrite user=api
+
+
+
+
 if systemctl status minio | grep -q active; then
 cat <<EOSUCCESS
 #######################################################
