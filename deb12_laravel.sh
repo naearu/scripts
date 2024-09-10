@@ -31,7 +31,7 @@ cd /etc/nginx/
 sed -i 's/user\ www\-data\;/user\ web\;/g' nginx.conf
 
 rm /etc/nginx/sites-enabled/default
-wget https://raw.githubusercontent.com/naearu/scripts/main/nginx/laravel.conf -O /etc/nginx/sites-enabled/opencart.conf
+wget https://raw.githubusercontent.com/naearu/scripts/main/nginx/laravel.conf -O /etc/nginx/sites-enabled/laravel.conf
  
 
 printf "\n\n## Web Base Dir Setting\n\n"
