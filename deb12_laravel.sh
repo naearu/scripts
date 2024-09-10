@@ -59,3 +59,9 @@ openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateseria
 
 service nginx restart
 service php8.2-fpm restart
+
+chown -R web:web /home/web
+
+su web -c "composer create-project laravel/laravel:^10 app"
+
+
