@@ -67,13 +67,9 @@ printf "\n\n## nginx \n\n"
 cd /etc/nginx/
 sed -i "s/user\ nginx\;/user\ $USERNAME\;/g" nginx.conf
 
-mkdir /etc/nginx/sites-enabled
-echo "" >> /etc/nginx/nginx.conf
-echo "include /etc/nginx/sites-enabled/*.conf;" >> /etc/nginx/nginx.conf
 
-wget https://raw.githubusercontent.com/naearu/scripts/main/nginx/laravel.conf -O /etc/nginx/sites-enabled/laravel.conf
-
-sed -i "s/\/web\//\/$USERNAME\//g" /etc/nginx/sites-enabled/laravel.conf
+wget https://raw.githubusercontent.com/naearu/scripts/main/nginx/laravel.conf -O /etc/nginx/conf.d/laravel.conf
+sed -i "s/\/web\//\/$USERNAME\//g" /etc/nginx/conf.d/laravel.conf
 
 
 printf "\n\n## Dir Setting\n\n"
