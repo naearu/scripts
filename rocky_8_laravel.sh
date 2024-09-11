@@ -10,13 +10,14 @@ if [[ $NEW_USERNAME != "" ]]; then
 fi
 
 
-
-
 printf "\n\n## Update & Upgrade \n\n"
 yum -y upgrade && yum clean all
 
 printf "\n\n## Installation of required items\n\n"
-yum install -y nginx php php-common php-fpm php-gd php-json php-curl php-mbstring php-intl  php-xml php-zip  php-bcmath php-soap  nodejs npm vim php-devel php-pear make wget tar epel-release
+dnf module -y reset nodejs
+dnf module -y enable nodejs:12
+dnf module -y install nodejs:12/common
+yum install -y nginx php php-common php-fpm php-gd php-json php-curl php-mbstring php-intl  php-xml php-zip  php-bcmath php-soap npm vim php-devel php-pear make wget tar epel-release
 
 # php-redis
 wget https://pecl.php.net/get/redis-5.3.7.tgz
