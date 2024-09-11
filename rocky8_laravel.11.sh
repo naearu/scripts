@@ -34,9 +34,10 @@ printf "\n\n## php-fprm \n\n"
 sed -i 's/\;request\_slowlog\_timeout\ \=\ 0/request\_slowlog\_timeout\ \=\ 10s/g' /etc/php-fpm.d/www.conf
 sed -i 's/\;request\_terminate\_timeout\ \=\ 0/request\_terminate\_timeout\ \=\ 1200/g' /etc/php-fpm.d/www.conf
 sed -i 's/\;catch\_workers\_output\ \=\ yes/catch\_workers\_output = yes/g' /etc/php-fpm.d/www.conf
-#sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
-#sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
 sed -i "s/listen\.acl_users\ \=\ apache\,nginx/listen\.acl_users\ \=\ apache\,nginx\,$USERNAME/g" /etc/php-fpm.d/www.conf
+
 mkdir /var/log/php-fpm
 service php-fpm start
 
