@@ -13,20 +13,12 @@ fi
 printf "\n\n## Update & Upgrade \n\n"
 dnf -y upgrade && dnf clean all
 
-# nodejs 12
-dnf module -y reset nodejs
-dnf module -y enable nodejs:20
-dnf module -y install nodejs:20/common
-
-# php 8.2
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 
-dnf module -y reset php
-dnf module -y enable php:8.2
-
-dnf module -y reset nginx
-dnf module -y enable nginx:1.24
+dnf -y module reset php nodejs nginx
+dnf -y module enable nodejs:20 php:remi-8.2 nginx:1.24
+dnf -y module install nodejs:20/common php:remi-8.2
 
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
