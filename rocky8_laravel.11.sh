@@ -34,8 +34,8 @@ printf "\n\n## php-fprm \n\n"
 sed -i 's/\;request\_slowlog\_timeout\ \=\ 0/request\_slowlog\_timeout\ \=\ 10s/g' /etc/php-fpm.d/www.conf
 sed -i 's/\;request\_terminate\_timeout\ \=\ 0/request\_terminate\_timeout\ \=\ 1200/g' /etc/php-fpm.d/www.conf
 sed -i 's/\;catch\_workers\_output\ \=\ yes/catch\_workers\_output = yes/g' /etc/php-fpm.d/www.conf
-sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
-sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+#sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+#sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
 
 mkdir /var/log/php-fpm
 service php-fpm start
@@ -47,13 +47,12 @@ sed -i 's/upload\_max\_filesize\ \=\ 2M/upload\_max\_filesize\ \=\ 50M/g' /etc/p
 sed -i 's/memory\_limit\ \=\ 128M/memory\_limit\ \=\ 512M/g' /etc/php.ini
 
 printf "\n\n## nginx \n\n"
-cd /etc/nginx/
-sed -i "s/user\ nginx\;/user\ $USERNAME\;/g" nginx.conf
+#sed -i "s/user\ nginx\;/user\ $USERNAME\;/g" /etc/nginx/nginx.conf
 
 
 wget https://raw.githubusercontent.com/naearu/scripts/main/nginx/laravel.conf -O /etc/nginx/conf.d/laravel.conf
 sed -i "s/\/web\//\/$USERNAME\//g" /etc/nginx/conf.d/laravel.conf
-
+sed -i "s/\/run\/php\/php8\.2\-fpm\.sock/\/run\/php\-fpm\/www\.sock/g" /etc/nginx/conf.d/laravel.conf
 
 printf "\n\n## Dir Setting\n\n"
 
