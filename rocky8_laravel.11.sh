@@ -15,8 +15,8 @@ dnf -y upgrade && dnf clean all
 
 # nodejs 12
 dnf module -y reset nodejs
-dnf module -y enable nodejs:12
-dnf module -y install nodejs:12/common
+dnf module -y enable nodejs:20
+dnf module -y install nodejs:20/common
 
 # php 8.2
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
