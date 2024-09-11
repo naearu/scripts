@@ -95,7 +95,7 @@ openssl genrsa -out server.key 2048
 echo -ne "\n\n\n\n\n\n\n\n\n" | openssl req -new -key server.key -out server.csr
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt
 
-su $USERNAME -c "cd ~&&composer create-project laravel/laravel:^10 app"
+su $USERNAME -c "cd ~&&composer create-project laravel/laravel:^7 app"
 su $USERNAME -c "cd ~/app&&npm install&&npm run build"
 su $USERNAME -c "cd ~/app&&php artisan storage:link"
 
