@@ -26,7 +26,7 @@ dnf module -y reset php
 dnf module -y enable php:8.2
 
 dnf module -y reset nginx
-dnf module -y enable php:1.24
+dnf module -y enable nginx:1.24
 
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
