@@ -22,10 +22,11 @@ dnf module -y install nodejs:20/common
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 
-dnf -y install yum-utils
-dnf -y module reset php
-dnf -y module install php:remi-8.2
+dnf module -y reset php
+dnf module -y enable php:8.2
 
+dnf module -y reset nginx
+dnf module -y enable php:1.24
 
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
