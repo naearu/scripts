@@ -18,7 +18,7 @@ dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 
 dnf -y module reset php nodejs nginx
 dnf -y module enable nodejs:20 php:remi-8.4 nginx:1.24
-dnf -y module install nodejs:20/common php:remi-8.2
+dnf -y module install nodejs:20/common php:remi-8.4
 
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
