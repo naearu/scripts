@@ -16,3 +16,6 @@ bash -c "$(curl -o - https://raw.githubusercontent.com/naearu/scripts/main/rocky
 ```
 bash -c "$(curl -o - https://raw.githubusercontent.com/naearu/scripts/main/rocky8_laravel.11.sh)"
 ```
+```
+bash -c "$(curl -o - https://raw.githubusercontent.com/naearu/scripts/main/rocky9_laravel.11.sh)"
+```
