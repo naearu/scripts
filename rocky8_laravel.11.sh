@@ -11,7 +11,7 @@ fi
 
 
 printf "\n\n## Update & Upgrade \n\n"
-dnf -y upgrade && dnf clean all
+dnf -y upgrade
 
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
@@ -23,8 +23,10 @@ dnf -y module install nodejs:20/common php:remi-8.2
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
 php-zip php-soap php-redis php-imagick php-zip \
-php-pgsql php-mysql \
-nginx npm vim wget tar composer openssh-server
+php-pgsql php-mysql supervisor \
+nginx npm vim wget tar composer openssh-server git unzip
+
+dnf clean all
 
 
 echo -ne "\n\n" | adduser $USERNAME
@@ -80,5 +82,24 @@ su $USERNAME -c "cd ~/app&&php artisan storage:link"
 chown -R $USERNAME:$USERNAME /home/$USERNAME
 chown -R $USERNAME:$USERNAME /var/lib/nginx
 
-service nginx restart
-service php-fpm restart
+chown -R $USERNAME:$USERNAME /home/$USERNAME
+chown -R $USERNAME:$USERNAME /var/lib/nginx
+
+systemctl enable nginx.service
+systemctl enable php-fpm.service
+
+systemctl restart nginx.service
+systemctl restart php-fpm.service
+
+cp -R ~/.ssh /home/$USERNAME/
+chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
+
+
+echo "Deploy key --- "
+su $USERNAME -c "echo -ne \"\n\n\n\n\n\n\n\n\n\" | ssh-keygen -t rsa"
+cat /home/$USERNAME/.ssh/id_rsa.pub
+
+echo "Host IP --- "
+hostname -I
+
+
