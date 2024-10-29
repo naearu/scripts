@@ -23,7 +23,7 @@ dnf -y module install nodejs:20/common php:remi-8.4
 yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
 php-zip php-soap php-redis php-imagick php-zip \
-php-pgsql php-mysql \
+php-pgsql php-mysql supervisor \
 nginx npm vim wget tar composer openssh-server git unzip
 
 dnf clean all
