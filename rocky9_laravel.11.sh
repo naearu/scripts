@@ -85,3 +85,12 @@ systemctl enable php-fpm.service
 
 systemctl restart nginx.service
 systemctl restart php-fpm.service
+
+echo -ne "\n\n\n\n\n\n\n\n\n" | ssh-keygen -t rsa
+echo "Deploy key --- "
+cat ~/.ssh/id_rsa.pub
+
+echo "Host IP --- "
+hostname -I
+
+
