@@ -24,7 +24,7 @@ yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
 php-zip php-soap php-redis php-imagick php-zip \
 php-pgsql php-mysql \
-nginx npm vim wget tar composer
+nginx npm vim wget tar composer openssh-server
 
 
 echo -ne "\n\n" | adduser $USERNAME
