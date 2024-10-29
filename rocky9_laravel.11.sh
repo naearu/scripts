@@ -11,7 +11,7 @@ fi
 
 
 printf "\n\n## Update & Upgrade \n\n"
-dnf -y upgrade && dnf clean all
+dnf -y upgrade
 
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
