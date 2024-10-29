@@ -78,5 +78,8 @@ su $USERNAME -c "cd ~/app&&php artisan storage:link"
 
 chown -R $USERNAME:$USERNAME /home/$USERNAME
 
+systemctl enable nginx.service
+systemctl enable php-fpm.service
+
 service nginx restart
 service php-fpm restart
