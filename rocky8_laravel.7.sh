@@ -20,7 +20,7 @@ dnf module -y install nodejs:12/common
 yum install -y nginx php php-common php-fpm php-gd php-json \
 php-curl php-mbstring php-intl  php-xml php-zip  php-bcmath \
 php-soap npm vim php-devel php-pear make wget tar epel-release \
-php-pgsql php-mysql
+php-pgsql php-mysql openssh-server
 
 # php-redis
 wget https://pecl.php.net/get/redis-5.3.7.tgz
