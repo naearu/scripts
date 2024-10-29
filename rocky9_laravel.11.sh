@@ -78,9 +78,10 @@ su $USERNAME -c "cd ~/app&&npm install&&npm run build"
 su $USERNAME -c "cd ~/app&&php artisan storage:link"
 
 chown -R $USERNAME:$USERNAME /home/$USERNAME
+chown -R $USERNAME:$USERNAME /var/lib/nginx
 
 systemctl enable nginx.service
 systemctl enable php-fpm.service
 
-service nginx restart
-service php-fpm restart
+systemctl restart nginx.service
+systemctl restart php-fpm.service
