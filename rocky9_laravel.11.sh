@@ -24,7 +24,9 @@ yum install -y php php-common php-fpm php-intl \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
 php-zip php-soap php-redis php-imagick php-zip \
 php-pgsql php-mysql \
-nginx npm vim wget tar composer openssh-server
+nginx npm vim wget tar composer openssh-server git
+
+dnf clean all
 
 
 echo -ne "\n\n" | adduser $USERNAME
@@ -86,10 +88,12 @@ systemctl enable php-fpm.service
 systemctl restart nginx.service
 systemctl restart php-fpm.service
 
-ssh-keygen -t rsa
 cp -R ~/.ssh /home/$USERNAME/
 chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
+
+
 echo "Deploy key --- "
+su $USERNAME -c "echo -ne \"\n\n\n\n\n\n\n\n\n\" | ssh-keygen -t rsa"
 cat /home/$USERNAME/.ssh/id_rsa.pub
 
 echo "Host IP --- "
