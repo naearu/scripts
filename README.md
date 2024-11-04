@@ -1,4 +1,5 @@
-# scripts
+# Scripts
+서버 설정 스크립트
 
 # Debian
 ```
