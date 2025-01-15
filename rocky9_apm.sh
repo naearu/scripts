@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "#v0115.7 ##################################################"
+echo "#v0115.8 ##################################################"
 
 USERNAME=web
 
@@ -20,7 +20,8 @@ dnf makecache
 
 # Install Apache
 printf "\nInstalling Apache...\n"
-sudo dnf install httpd mod_ssl mod_security -y
+sudo dnf install httpd mod_ssl -y
+# mod_security
 
 
 # Start and enable Apache
@@ -38,7 +39,7 @@ dnf -y module reset php
 dnf -y module enable php:remi-8.4
 dnf -y module install php:remi-8.4
 
-yum install -y php php-common php-fpm php-intl php-cli \
+yum install -y php php-common php-intl php-cli \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
 php-zip php-soap php-redis php-imagick php-zip \
 php-pgsql php-mysql php-mysqlnd \
