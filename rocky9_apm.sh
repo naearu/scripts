@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "#v0115.3 ##################################################"
+echo "#v0115.4 ##################################################"
 
 USERNAME=web
 
@@ -103,7 +103,7 @@ chown -R $USERNAME:$USERNAME /home/$USERNAME
 
 # Configure Apache
 printf "\nConfiguring Apache...\n"
-wget https://raw.githubusercontent.com/naearu/scripts/main/apache/2.4.conf -O /etc/httpd/conf.dvhost.conf
+wget https://raw.githubusercontent.com/naearu/scripts/main/apache/2.4.conf -O /etc/httpd/conf.d/vhost.conf
 
 sed -i "s/\/home\/web\//\/home\/$USERNAME\//g" /etc/httpd/conf.dvhost.conf
 
