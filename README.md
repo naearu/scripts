@@ -20,3 +20,9 @@ bash -c "$(curl -o - https://naearu.github.io/scripts/rocky8_laravel.11.sh)"
 ```
 bash -c "$(curl -o - https://naearu.github.io/scripts/rocky9_laravel.11.sh)"
 ```
+```
+bash -c "$(curl -o - https://naearu.github.io/scripts/rocky9_apm.sh)"
+```
+
+
+
