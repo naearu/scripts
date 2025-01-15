@@ -69,6 +69,7 @@ printf "\nCreating user $USERNAME\n"
 
 echo -ne "\n\n" | adduser $USERNAME
 
+chmod +x /home/$USERNAME
 mkdir -p /home/$USERNAME/log/
 mkdir -p /home/$USERNAME/ssl/
 mkdir -p /home/$USERNAME/app/public
@@ -106,6 +107,12 @@ printf "\nConfiguring Apache...\n"
 wget https://raw.githubusercontent.com/naearu/scripts/main/apache/2.4.conf -O /etc/httpd/conf.d/vhost.conf
 
 sed -i "s/\/home\/web\//\/home\/$USERNAME\//g" /etc/httpd/conf.d/vhost.conf
+
+sed -i "s/User apache/User $USERNAME/g" /etc/httpd/conf/httpd.conf
+sed -i "s/Group apache/Group $USERNAME/g" /etc/httpd/conf/httpd.conf
+
+mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
+
 
 sudo systemctl restart httpd
 
