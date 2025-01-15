@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "##################################################"
+echo "#v0115.3 ##################################################"
 
 USERNAME=web
 
@@ -11,7 +11,7 @@ fi
 
 
 # Update system packages
-echo "Updating system packages..."
+printf "\nUpdating system packages...\n"
 dnf -y upgrade
 dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
 dnf install epel-release -y
@@ -19,7 +19,7 @@ dnf makecache
 
 
 # Install Apache
-echo "Installing Apache..."
+printf "\nInstalling Apache...\n"
 sudo dnf install httpd mod_ssl mod_security -y
 
 
@@ -28,12 +28,12 @@ sudo systemctl start httpd
 sudo systemctl enable httpd
 
 # Install MySQL Server (MariaDB)
-echo "Installing MariaDB Server..."
+printf "\nInstalling MariaDB Server...\n"
 sudo dnf install mariadb-server -y
 
 
 # Install PHP and extensions
-echo "Installing PHP and extensions..."
+printf "\nInstalling PHP and extensions...\n"
 dnf -y module reset php
 dnf -y module enable php:remi-8.4
 dnf -y module install php:remi-8.4
@@ -46,18 +46,18 @@ supervisor vim wget tar composer openssh-server git unzip
 
 
 # Restart Apache to load PHP module
-echo "Restarting Apache..."
+printf "\nRestarting Apache...\n"
 sudo systemctl restart httpd
 
 
 # Configure firewall
-echo "Configuring firewall..."
+printf "\nConfiguring firewall...\n"
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd --reload
 
 
-echo "Configuring PHP..."
+printf "\nConfiguring PHP...\n"
 sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Asia\/Seoul/g' php.ini
 sed -i 's/post\_max\_size\ \=\ 8M/post\_max\_size\ =\ 50M/g' /etc/php.ini
 sed -i 's/upload\_max\_filesize\ \=\ 2M/upload\_max\_filesize\ \=\ 50M/g' /etc/php.ini
@@ -65,7 +65,7 @@ sed -i 's/memory\_limit\ \=\ 128M/memory\_limit\ \=\ 512M/g' /etc/php.ini
 
 
 # create user
-echo "Creating user $USERNAME"
+printf "\nCreating user $USERNAME\n"
 
 echo -ne "\n\n" | adduser $USERNAME
 
@@ -76,7 +76,7 @@ chown -R $USERNAME:$USERNAME /home/$USERNAME
 
 
 # Create SSL certificates
-echo "Creating SSL certificates..."
+printf "\nCreating SSL certificates...\n"
 
 cd /home/$USERNAME/ssl/
 
@@ -90,19 +90,19 @@ openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateseria
 cp -R ~/.ssh /home/$USERNAME/
 chown -R $USERNAME:$USERNAME /home/$USERNAME/
 
-echo "Deploy key --- "
+printf "\nDeploy key --- \n"
 su $USERNAME -c "echo -ne \"\n\n\n\n\n\n\n\n\n\" | ssh-keygen -t rsa"
 
 
 
 # Create default index.php
-echo "Creating default index.php..."
-echo "<?php phpinfo(); ?>" > /home/$USERNAME/app/public/index.php
+printf "\nCreating default index.php...\n"
+printf "<?php phpinfo(); ?>" > /home/$USERNAME/app/public/index.php
 
 chown -R $USERNAME:$USERNAME /home/$USERNAME
 
 # Configure Apache
-echo "Configuring Apache..."
+printf "\nConfiguring Apache...\n"
 wget https://raw.githubusercontent.com/naearu/scripts/main/apache/2.4.conf -O /etc/httpd/conf.dvhost.conf
 
 sed -i "s/\/home\/web\//\/home\/$USERNAME\//g" /etc/httpd/conf.dvhost.conf
@@ -111,24 +111,25 @@ sudo systemctl restart httpd
 
 
 # Verify installations
-echo "Verifying installations..."
+printf "Verifying installations..."
 apache_version=$(httpd -v | grep "Server version")
 php_version=$(php -v | head -n 1)
 mariadb_version=$(mysql --version)
 host_ip=$(hostname -I)
 
-echo "\nInstallation Summary:"
-echo "Apache Version: $apache_version"
-echo "PHP Version: $php_version"
-echo "MariaDB Version: $mariadb_version"
-echo "host IP: $host_ip"
+printf "\nInstallation Summary:"
+printf "\nApache Version: $apache_version\n"
+printf "\nPHP Version: $php_version\n"
+printf "\nMariaDB Version: $mariadb_version\n"
+printf "\nhost IP: $host_ip\n"
 
 
 # deploy key
-echo "\nDeploy key --- "
+printf "\n\nDeploy key --- \n\n"
 cat /home/$USERNAME/.ssh/id_rsa.pub
 
-echo "\nAPM stack installation completed!"
-echo "You can place your PHP files in /home/$USERNAME/app/public and access them via your server's IP address."
+printf "\n\nAPM stack installation completed!\n"
+printf "You can place your PHP files in /home/$USERNAME/app/public and access them via your server's IP address.\n\n"
 
-#0115
+printf "\nPlease run \"mysql_secure_installation\" to set the root password and configure security settings.\n\n"
+
