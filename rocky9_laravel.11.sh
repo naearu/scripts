@@ -88,6 +88,13 @@ systemctl enable php-fpm.service
 systemctl restart nginx.service
 systemctl restart php-fpm.service
 
+
+wget https://raw.githubusercontent.com/naearu/scripts/main/conf/supervisord.service -O /etc/systemd/system/supervisord.service
+systemctl daemon-reload
+systemctl enable supervisord
+systemctl start supervisord
+
+
 cp -R ~/.ssh /home/$USERNAME/
 chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
 
