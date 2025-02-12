@@ -59,7 +59,7 @@ sudo firewall-cmd --reload
 
 
 printf "\nConfiguring PHP...\n"
-sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Asia\/Seoul/g' php.ini
+sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Asia\/Seoul/g' /etc/php.ini
 sed -i 's/post\_max\_size\ \=\ 8M/post\_max\_size\ =\ 50M/g' /etc/php.ini
 sed -i 's/upload\_max\_filesize\ \=\ 2M/upload\_max\_filesize\ \=\ 50M/g' /etc/php.ini
 sed -i 's/memory\_limit\ \=\ 128M/memory\_limit\ \=\ 512M/g' /etc/php.ini
