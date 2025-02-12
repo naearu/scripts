@@ -20,7 +20,11 @@ dnf makecache
 
 # Install Apache
 printf "\nInstalling Apache...\n"
-sudo dnf install httpd mod_ssl -y
+dnf -y install httpd httpd-devel \
+apr apr-util apr-devel apr-util-devel \
+apr-util-openssl mod_proxy_html apr-util \
+libnghttp2 mod_http2 mod_ssl httpd-tools
+
 # mod_security
 
 
@@ -46,6 +50,7 @@ php-pgsql php-mysql php-mysqlnd \
 supervisor vim wget tar composer openssh-server git unzip
 
 
+
 # Restart Apache to load PHP module
 printf "\nRestarting Apache...\n"
 sudo systemctl restart httpd
@@ -63,6 +68,15 @@ sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Asia\/Seoul/g' /etc/php.ini
 sed -i 's/post\_max\_size\ \=\ 8M/post\_max\_size\ =\ 50M/g' /etc/php.ini
 sed -i 's/upload\_max\_filesize\ \=\ 2M/upload\_max\_filesize\ \=\ 50M/g' /etc/php.ini
 sed -i 's/memory\_limit\ \=\ 128M/memory\_limit\ \=\ 512M/g' /etc/php.ini
+sed -i 's/expose\_php\ \=\ On/expose\_php\ \=\ Off/g' /etc/php.ini
+
+sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+
+
+systemctl restart php-fpm
+
+chmod 666 /run/php-fpm/www.sock
 
 
 # create user
@@ -75,6 +89,10 @@ mkdir -p /home/$USERNAME/log/
 mkdir -p /home/$USERNAME/ssl/
 mkdir -p /home/$USERNAME/app/public
 chown -R $USERNAME:$USERNAME /home/$USERNAME
+chmod +x /home/$USERNAME
+
+# add sudoers 
+printf "\n\n$USERNAME  ALL=(ALL)  ALL\n\n" >> /etc/sudoers
 
 
 # Create SSL certificates
