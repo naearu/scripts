@@ -45,7 +45,7 @@ dnf -y module install php:remi-8.4
 
 yum install -y php php-common php-intl php-cli \
 php-gd php-json php-curl php-mbstring php-xml php-bcmath \
-php-zip php-soap php-redis php-imagick php-zip \
+php-zip php-soap php-redis php-imagick php-zip php-ldap \
 php-pgsql php-mysql php-mysqlnd \
 supervisor vim wget tar composer openssh-server git unzip
 
