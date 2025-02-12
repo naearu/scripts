@@ -72,6 +72,7 @@ sed -i 's/expose\_php\ \=\ On/expose\_php\ \=\ Off/g' /etc/php.ini
 
 sed -i "s/user\ \=\ apache/user\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
 sed -i "s/group\ \=\ apache/group\ \=\ $USERNAME/g" /etc/php-fpm.d/www.conf
+sed -i "s/;listen\.mode\ \=\ 0660/listen\.mode\ \=\ 0666/g" /etc/php-fpm.d/www.conf
 
 
 systemctl restart php-fpm
