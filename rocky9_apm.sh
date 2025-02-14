@@ -29,12 +29,12 @@ libnghttp2 mod_http2 mod_ssl httpd-tools
 
 
 # Start and enable Apache
-sudo systemctl start httpd
-sudo systemctl enable httpd
+systemctl start httpd
+systemctl enable httpd
 
 # Install MySQL Server (MariaDB)
 printf "\nInstalling MariaDB Server...\n"
-sudo dnf install mariadb-server -y
+dnf install mariadb-server -y
 
 
 # Install PHP and extensions
@@ -53,14 +53,14 @@ supervisor vim wget tar composer openssh-server git unzip
 
 # Restart Apache to load PHP module
 printf "\nRestarting Apache...\n"
-sudo systemctl restart httpd
+systemctl restart httpd
 
 
 # Configure firewall
 printf "\nConfiguring firewall...\n"
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --reload
+firewall-cmd --permanent --add-service=http
+firewall-cmd --permanent --add-service=https
+firewall-cmd --reload
 
 
 printf "\nConfiguring PHP...\n"
@@ -134,7 +134,7 @@ sed -i "s/Group apache/Group $USERNAME/g" /etc/httpd/conf/httpd.conf
 mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
 
 
-sudo systemctl restart httpd
+systemctl restart httpd
 
 
 # Verify installations
